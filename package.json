@@ -1,7 +1,7 @@
 {
   "name": "secure-handlebars-helpers",
   "description": "Client-side XSS filters for templates processed by context-parser-handlebars",
-  "version": "0.99.4",
+  "version": "0.99.5",
   "licenses": [
     {
       "type": "BSD",
