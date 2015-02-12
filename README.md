@@ -36,6 +36,9 @@ grunt
 grunt test
 ```
 
+### Build
+[![Build Status](https://travis-ci.org/yahoo/secure-handlebars-helpers.svg?branch=master)](https://travis-ci.org/yahoo/secure-handlebars-helpers)
+
 ## License
 This software is free to use under the Yahoo BSD license. 
 See the [LICENSE file](./LICENSE) for license text and copyright information.
