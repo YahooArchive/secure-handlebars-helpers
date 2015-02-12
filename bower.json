@@ -1,0 +1,15 @@
+{
+  "name": "test",
+  "version": "0.1.0",
+  "authors": [
+    "adon <adon@yahoo-inc.com>"
+  ],
+  "license": "BSD",
+  "private": true,
+  "devDependencies": {
+    "handlebars-1.3": "handlebars#1.3.x",
+    "handlebars-2.0": "handlebars#2.0.x",
+    "handlebars-3.0": "handlebars#3.0.x",
+    "expect": "~0.3.1"
+  }
+}

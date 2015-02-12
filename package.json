@@ -1,0 +1,66 @@
+{
+  "name": "secure-handlebars-helpers",
+  "description": "Client-side XSS filters for templates processed by context-parser-handlebars",
+  "version": "0.99.4",
+  "licenses": [
+    {
+      "type": "BSD",
+      "url": "https://github.com/yahoo/secure-handlebars-helpers/blob/master/LICENSE"
+    }
+  ],
+  "author": "Nera Liu <neraliu@yahoo-inc.com>, Adonis Fung <adon@yahoo-inc.com> and Albert Yu <albertyu@yahoo-inc.com>",
+  "contributors": [
+    {
+      "name": "Nera Liu",
+      "email": "neraliu@yahoo-inc.com"
+    },
+    {
+      "name": "Adonis Fung",
+      "email": "adon@yahoo-inc.com"
+    },
+    {
+      "name": "Albert Yu",
+      "email": "albertyu@yahoo-inc.com"
+    }
+  ],
+  "keywords": [
+    "xss",
+    "security",
+    "escape",
+    "encode",
+    "filter",
+    "context",
+    "html5",
+    "handlebars",
+    "helpers"
+  ],
+  "scripts": {
+    "hint": "grunt jshint",
+    "build": "npm install; grunt build",
+    "docs": "grunt doc",
+    "clean": "grunt clean",
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "xss-filters": "~0.99.10"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-bower-task": "^0.4.0",
+    "grunt-browserify": "^3.3.0",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-uglify": "^0.7.0",
+    "grunt-karma": "^0.10.1",
+    "karma-coverage": "~0.2.7",
+    "karma-junit-reporter": "~0.2.2",
+    "karma-mocha": "~0.1.10",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "mocha": "~2.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yahoo/secure-handlebars-helpers"
+  }
+}

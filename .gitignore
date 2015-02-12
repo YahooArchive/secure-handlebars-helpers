@@ -1,0 +1,12 @@
+# install
+*.log
+node_modules
+
+# test
+xunit.xml
+artifacts
+coverage
+tests/bower_components
+
+# build
+docs
