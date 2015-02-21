@@ -24,17 +24,9 @@ var html = compiledTemplate({
 Note: Read more about the underlying output filtering principle at [xss-filters](https://github.com/yahoo/xss-filters).
 
 ## Contribute
-
-### How to build
-```
-npm install
-grunt
-```
-
-### How to test
-```
-grunt test
-```
+To contribute, you will make changes in `src/` and `tests/`, followed by the following commands:
+- ```$ npm run-script build``` to build the standalone JavaScript for client-side use
+- ```$ npm test``` to run the tests
 
 ### Build
 [![Build Status](https://travis-ci.org/yahoo/secure-handlebars-helpers.svg?branch=master)](https://travis-ci.org/yahoo/secure-handlebars-helpers)
