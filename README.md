@@ -17,14 +17,14 @@ Download the latest version at [dist/secure-handlebars-helpers.min.js](./dist/se
 var compiledTemplate = Handlebars.compile("<title>{{{yd title}}}</title>");
 // html is assigned <title>&lt;script>alert('xss')&lt;/script></title>
 var html = compiledTemplate({
-	title: "<script>alert('xss')</script>"
+    title: "<script>alert('xss')</script>"
 });
 </script>
 ```
 Note: Read more about the underlying output filtering principle at [xss-filters](https://github.com/yahoo/xss-filters).
 
 ## Contribute
-To contribute, you will make changes in `src/` and `tests/`, followed by the following commands:
+To contribute, you will make changes in [`src/`](./src) and [`tests/`](./tests), followed by the following commands:
 - ```$ npm run-script build``` to build the standalone JavaScript for client-side use
 - ```$ npm test``` to run the tests
 
