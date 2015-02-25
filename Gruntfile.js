@@ -4,9 +4,10 @@ Copyrights licensed under the New BSD License.
 See the accompanying LICENSE file for terms.
 */
 module.exports = function(grunt) {
+  var pkg = grunt.file.readJSON('package.json');
 
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: pkg,
     jshint: {
       files: ['src/*.js'],
       options: {
@@ -15,10 +16,12 @@ module.exports = function(grunt) {
         unused: true
       }
     },
-    browserify: {
-      client: {
-        src: [ 'src/<%= pkg.name %>.js' ],
-        dest: 'dist/<%= pkg.name %>.js'
+    bower: {
+      forTests: {
+        options: {
+          targetDir: 'tests/bower_components',
+          cleanup: true
+        }
       }
     },
     uglify: {
@@ -29,18 +32,20 @@ module.exports = function(grunt) {
               + ' */\n'
       },
       build: {
-        files: [{
-          'dist/<%= pkg.name %>.min.js': 'dist/<%= pkg.name %>.js',
-          'dist/<%= pkg.name %>.min.<%= pkg.version %>.js': 'dist/<%= pkg.name %>.js'
-        }]
-      }
-    },
-    bower: {
-      forTests: {
-        options: {
-          targetDir: 'tests/bower_components',
-          cleanup: true
-        }
+        files: (function() {
+
+          // extract source code of privFilters from xssFilters
+          var privFiltersSrc = require('xss-filters')._getPrivFilters.toString();
+          grunt.file.write('dist/' + pkg.name + '.js', 
+            '(function(){var privFilters = ' + privFiltersSrc + '();'
+              + grunt.file.read('src/' + pkg.name + '.js')
+              +'})()');
+
+          return {
+            'dist/<%= pkg.name %>.min.js': 'dist/<%= pkg.name %>.js',
+            'dist/<%= pkg.name %>.min.<%= pkg.version %>.js': 'dist/<%= pkg.name %>.min.js'
+          }
+        })()
       }
     },
     karma: {
@@ -52,7 +57,7 @@ module.exports = function(grunt) {
           files: [
             'tests/bower_components/expect/index.js',
             'tests/bower_components/handlebars-1.3/handlebars.js',
-            'dist/secure-handlebars-helpers.min.js',
+            'dist/<%= pkg.name %>.min.js',
             'tests/integration/spec/*.js'
           ],
           junitReporter: {
@@ -65,7 +70,7 @@ module.exports = function(grunt) {
           files: [
             'tests/bower_components/expect/index.js',
             'tests/bower_components/handlebars-2.0/handlebars.js',
-            'dist/secure-handlebars-helpers.min.js',
+            'dist/<%= pkg.name %>.min.js',
             'tests/integration/spec/*.js'
           ],
           junitReporter: {
@@ -78,7 +83,7 @@ module.exports = function(grunt) {
           files: [
             'tests/bower_components/expect/index.js',
             'tests/bower_components/handlebars-3.0/handlebars.js',
-            'dist/secure-handlebars-helpers.min.js',
+            'dist/<%= pkg.name %>.min.js',
             'tests/integration/spec/*.js'
           ],
 
@@ -115,13 +120,12 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
 
-  grunt.registerTask('build', ['browserify', 'uglify']);
-  grunt.registerTask('test', ['jshint', 'bower', 'karma']);
+  grunt.registerTask('build', ['uglify']);
+  grunt.registerTask('test', ['jshint', 'bower:forTests', 'karma']);
 
   grunt.registerTask('default', ['build', 'test']);
 
