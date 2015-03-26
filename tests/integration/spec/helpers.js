@@ -91,7 +91,7 @@ describe("secure handlebars helpers: compilation tests", function() {
         var html = "<input name={{{yavu name}}} value={{{yavu value}}} id={{{yavu id}}} />";
         var json = {name: "\"\t\n\f >", value: "", id: "'"};
         var output = compilation_test(html, json);
-        expect(output).to.eql("<input name=&quot;&#9;&#10;&#12;&#32;&gt; value=\u0000 id=&#39; />");
+        expect(output).to.eql("<input name=&quot;&#9;&#10;&#12;&#32;&gt; value=\ufffd id=&#39; />");
     });
 
     it('filter yavs test', function() {
