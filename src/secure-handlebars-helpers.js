@@ -10,18 +10,12 @@ Authors: Nera Liu <neraliu@yahoo-inc.com>
 /* jshint node: true, undef: true, unused: true */
 /* global Handlebars, privFilters */
 
-if (!Handlebars || !Handlebars.registerHelper) {
-    throw new ReferenceError('secure-handlebars: Handlebars is not defined');
-}
-
-// expect privFilters are available
-
-[
-    'y',
-    'yd', 'yc', 
-    'yavd', 'yavs', 'yavu',
-    'yu', 'yuc',
-    'yubl', 'yufull'
-].forEach(function(filterName){
-    Handlebars.registerHelper(filterName, privFilters[filterName]);
-});
+(function(Handlebars, filterNames, i, name){
+    if (!Handlebars || !Handlebars.registerHelper) {
+        throw new ReferenceError('Handlebars is not defined');
+    }
+    // expect privFilters are available
+    for (; (name = filterNames[i]); i++) {
+    	Handlebars.registerHelper(name, privFilters[name]);
+    }
+})(Handlebars, ['y','yd','yc','yavd','yavs','yavu','yu','yuc','yubl','yufull'], 0);

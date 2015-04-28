@@ -8,7 +8,7 @@
         NULL   = /\x00/g,
         SPECIAL_ATTR_VALUE_UNQUOTED_CHARS = /(?:^(?:["'`]|\x00+$|$)|[\x09-\x0D >])/g,
         SPECIAL_HTML_CHARS = /[&<>"'`]/g, 
-        SPECIAL_COMMENT_CHARS = /(?:^-*!?>|--!?>|--?!?$|\]>|\]$)/g;
+        SPECIAL_COMMENT_CHARS = /(?:\x00|^-*!?>|--!?>|--?!?$|\]>|\]$)/g;
 
     // Given a full URI, need to support "[" ( IPv6address ) "]" in URI as per RFC3986
     // Reference: https://tools.ietf.org/html/rfc3986
@@ -21,7 +21,7 @@
     // Reference: http://shazzer.co.uk/database/All/Characters-after-javascript-uri
     // Reference: https://html.spec.whatwg.org/multipage/syntax.html#consume-a-character-reference
     // Reference for named characters: https://html.spec.whatwg.org/multipage/entities.json
-    var URI_BLACKLIST_PROTOCOLS = ['javascript', 'data', 'vbscript', 'mhtml'],
+    var URI_BLACKLIST_PROTOCOLS = {'javascript':1, 'data':1, 'vbscript':1, 'mhtml':1},
         URI_PROTOCOL_COLON = /(?::|&#[xX]0*3[aA];?|&#0*58;?|&colon;)/,
         URI_PROTOCOL_HTML_ENTITIES = /&(?:#([xX][0-9A-Fa-f]+|\d+);?|Tab;|NewLine;)/g,
         URI_PROTOCOL_WHITESPACES = /(?:^[\x00-\x20]+|[\t\n\r\x00]+)/g,
@@ -94,9 +94,9 @@
             return typeof s === STR_UD ? STR_UD
                  : s === null          ? STR_NL
                  : s.toString()
-                    .replace(NULL, '\uFFFD')
                     .replace(SPECIAL_COMMENT_CHARS, function(m){
-                        return m === '--!' || m === '--' || m === '-' || m === ']' ? m + ' '
+                        return m === '\x00' ? '\uFFFD'
+                            : m === '--!' || m === '--' || m === '-' || m === ']' ? m + ' '
                             :/*
                             :  m === ']>'   ? '] >'
                             :  m === '-->'  ? '-- >'
@@ -156,16 +156,16 @@
             return typeof s === STR_UD ? STR_UD
                 : s === null           ? STR_NL
                 : s.toString().replace(SPECIAL_ATTR_VALUE_UNQUOTED_CHARS, function (m) {
-                    return m === '\t' ? '&#9;'  // in hex: 09
-                        :  m === '\n' ? '&#10;' // in hex: 0A
-                        :  m === '\v' ? '&#11;' // in hex: 0B  for IE
-                        :  m === '\f' ? '&#12;' // in hex: 0C
-                        :  m === '\r' ? '&#13;' // in hex: 0D
-                        :  m === ' '  ? '&#32;' // in hex: 20
-                        :  m === '>'  ? '&gt;'
-                        :  m === '"'  ? '&quot;'
-                        :  m === "'"  ? '&#39;'
-                        :  m === '`'  ? '&#96;'
+                    return m === '\t'   ? '&#9;'  // in hex: 09
+                        :  m === '\n'   ? '&#10;' // in hex: 0A
+                        :  m === '\x0B' ? '&#11;' // in hex: 0B  for IE. IE<9 \v equals v, so use \x0B instead
+                        :  m === '\f'   ? '&#12;' // in hex: 0C
+                        :  m === '\r'   ? '&#13;' // in hex: 0D
+                        :  m === ' '    ? '&#32;' // in hex: 20
+                        :  m === '>'    ? '&gt;'
+                        :  m === '"'    ? '&quot;'
+                        :  m === "'"    ? '&#39;'
+                        :  m === '`'    ? '&#96;'
                         : /*empty or all null*/ '\uFFFD';
                 });
         },
@@ -176,7 +176,7 @@
         // Notice that yubl MUST BE APPLIED LAST, and will not be used independently (expected output from encodeURI/encodeURIComponent and yavd/yavs/yavu)
         // This is used to disable JS execution capabilities by prefixing x- to ^javascript:, ^vbscript: or ^data: that possibly could trigger script execution in URI attribute context
         yubl: function (s) {
-            return URI_BLACKLIST_PROTOCOLS.indexOf(x.yup(s)) === -1 ? s : 'x-' + s;
+            return URI_BLACKLIST_PROTOCOLS[x.yup(s)] ? 'x-' + s : s;
         },
 
         // This is NOT a security-critical filter.
@@ -200,18 +200,12 @@ Authors: Nera Liu <neraliu@yahoo-inc.com>
 /* jshint node: true, undef: true, unused: true */
 /* global Handlebars, privFilters */
 
-if (!Handlebars || !Handlebars.registerHelper) {
-    throw new ReferenceError('secure-handlebars: Handlebars is not defined');
-}
-
-// expect privFilters are available
-
-[
-    'y',
-    'yd', 'yc', 
-    'yavd', 'yavs', 'yavu',
-    'yu', 'yuc',
-    'yubl', 'yufull'
-].forEach(function(filterName){
-    Handlebars.registerHelper(filterName, privFilters[filterName]);
-});})()
+(function(Handlebars, filterNames, i, name){
+    if (!Handlebars || !Handlebars.registerHelper) {
+        throw new ReferenceError('Handlebars is not defined');
+    }
+    // expect privFilters are available
+    for (; (name = filterNames[i]); i++) {
+    	Handlebars.registerHelper(name, privFilters[name]);
+    }
+})(Handlebars, ['y','yd','yc','yavd','yavs','yavu','yu','yuc','yubl','yufull'], 0);})()

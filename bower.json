@@ -1,6 +1,6 @@
 {
   "name": "secure-handlebars-helpers",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "main": "dist/secure-handlebars-helpers.min.js",
   "authors": [
     "adon <adon@yahoo-inc.com>"
@@ -11,7 +11,8 @@
     "src",
     "tests",
     "package.json",
-    "*.js"
+    "*.js",
+    ".travis.yml"
   ],
   "license": "BSD",
   "dependencies": {
