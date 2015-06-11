@@ -1,9 +1,16 @@
 secure-handlebars-helpers
 =========================
-
 This handy *client-side* script registers the required secure XSS output filters as handlebars' helpers, and is designed ONLY for  
 - templates processed with context-sensitive filters automatically inserted (e.g., `<title>{{{yd title}}}</title>`) using [context-parser-handlebars](https://www.npmjs.com/package/context-parser-handlebars).
 
+[![npm version][npm-badge]][npm]
+[![dependency status][dep-badge]][dep-status]
+
+[npm]: https://www.npmjs.org/package/secure-handlebars-helpers
+[npm-badge]: https://img.shields.io/npm/v/secure-handlebars-helpers.svg?style=flat-square
+[dep-status]: https://david-dm.org/yahoo/secure-handlebars-helpers
+[dep-badge]: https://img.shields.io/david/yahoo/secure-handlebars-helpers.svg?style=flat-square
+                
 ## Quick Start
 
 ### Client-side (browser)
