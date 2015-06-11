@@ -1,16 +1,11 @@
 secure-handlebars-helpers
 =========================
-This handy *client-side* script registers the required secure XSS output filters as handlebars' helpers, and is designed ONLY for  
-- templates processed with context-sensitive filters automatically inserted (e.g., `<title>{{{yd title}}}</title>`) using [context-parser-handlebars](https://www.npmjs.com/package/context-parser-handlebars).
-
 [![npm version][npm-badge]][npm]
 [![dependency status][dep-badge]][dep-status]
+[![Build Status](https://travis-ci.org/yahoo/secure-handlebars-helpers.svg?branch=master)](https://travis-ci.org/yahoo/secure-handlebars-helpers)
 
-[npm]: https://www.npmjs.org/package/secure-handlebars-helpers
-[npm-badge]: https://img.shields.io/npm/v/secure-handlebars-helpers.svg?style=flat-square
-[dep-status]: https://david-dm.org/yahoo/secure-handlebars-helpers
-[dep-badge]: https://img.shields.io/david/yahoo/secure-handlebars-helpers.svg?style=flat-square
-                
+This handy *client-side* script registers the required [XSS output filtering functions](https://www.npmjs.com/package/xss-filters) as handlebars' helpers, and is designed ONLY for templates that already have the context-sensitive filter markup (e.g., `<title>{{{yd title}}}</title>`) automatically inserted using [secure-handlebars](https://www.npmjs.com/package/secure-handlebars).
+
 ## Quick Start
 
 ### Client-side (browser)
@@ -35,9 +30,13 @@ To contribute, you will make changes in [`src/`](./src) and [`tests/`](./tests),
 - ```$ npm run-script build``` to build the standalone JavaScript for client-side use
 - ```$ npm test``` to run the tests
 
-### Build
-[![Build Status](https://travis-ci.org/yahoo/secure-handlebars-helpers.svg?branch=master)](https://travis-ci.org/yahoo/secure-handlebars-helpers)
-
 ## License
 This software is free to use under the Yahoo BSD license. 
 See the [LICENSE file](./LICENSE) for license text and copyright information.
+
+
+
+[npm]: https://www.npmjs.org/package/secure-handlebars-helpers
+[npm-badge]: https://img.shields.io/npm/v/secure-handlebars-helpers.svg?style=flat-square
+[dep-status]: https://david-dm.org/yahoo/secure-handlebars-helpers
+[dep-badge]: https://img.shields.io/david/yahoo/secure-handlebars-helpers.svg?style=flat-square
