@@ -1,6 +1,6 @@
 {
   "name": "secure-handlebars-helpers",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "dist/secure-handlebars-helpers.min.js",
   "authors": [
     "adon <adon@yahoo-inc.com>"

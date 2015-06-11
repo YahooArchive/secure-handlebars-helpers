@@ -15,7 +15,9 @@ var filterNames = [
 	'yd', 'yc', 
 	'yavd', 'yavs', 'yavu',
 	'yu', 'yuc',
-	'yubl', 'yufull'
+	'yubl', 'yufull',
+    'yceu', 'yced', 'yces', 
+    'yceuu', 'yceud', 'yceus'
 ];
 
 console.log('Integration test with Handlebars v' + Handlebars.VERSION);
@@ -54,6 +56,12 @@ describe("secure handlebars helpers: error tests", function() {
         // yubl will not be independently used
         // expect(filter.yubl()).to.eql('undefined');
 
+        expect(filter.yceu()).to.eql('undefined');
+        expect(filter.yced()).to.eql('undefined');
+        expect(filter.yces()).to.eql('undefined');
+        expect(filter.yceuu()).to.eql('undefined');
+        expect(filter.yceud()).to.eql('undefined');
+        expect(filter.yceus()).to.eql('undefined');
 
     	expect(filter.y()).to.eql('undefined');
     });
@@ -107,6 +115,47 @@ describe("secure handlebars helpers: compilation tests", function() {
         var output = compilation_test(html, json);
         expect(output).to.eql('<div id="divid"></div>');
     });
+
+
+    it('filter yceu test', function() {
+        var html = '<div style="background: {{{yceu value}}}"></div>';
+        var json = {value: "red"};
+        var output = compilation_test(html, json);
+        expect(output).to.eql('<div style="background: red"></div>');
+    });
+    it('filter yced test', function() {
+        var html = '<div style="background: &quot;{{{yced value}}}&quot;"></div>';
+        var json = {value: "red"};
+        var output = compilation_test(html, json);
+        expect(output).to.eql('<div style="background: &quot;red&quot;"></div>');
+    });
+    it('filter yces test', function() {
+        var html = '<div style="background: \'{{{yces value}}}\'"></div>';
+        var json = {value: "red"};
+        var output = compilation_test(html, json);
+        expect(output).to.eql('<div style="background: \'red\'"></div>');
+    });
+
+
+    it('filter yceuu test', function() {
+        var html = '<div style="background: url({{{yceuu value}}})"></div>';
+        var json = {value: "javascript:alert(1)"};
+        var output = compilation_test(html, json);
+        expect(output).to.eql('<div style="background: url(##javascript:alert\\28 1\\29 )"></div>');
+    });
+    it('filter yceud test', function() {
+        var html = '<div style="background: url(&quot;{{{yceud value}}}&quot;)"></div>';
+        var json = {value: "javascript:alert(1)"};
+        var output = compilation_test(html, json);
+        expect(output).to.eql('<div style="background: url(&quot;##javascript:alert(1)&quot;)"></div>');
+    });
+    it('filter yceus test', function() {
+        var html = '<div style="background: url(\'{{{yceus value}}}\')"></div>';
+        var json = {value: "javascript:alert(1)"};
+        var output = compilation_test(html, json);
+        expect(output).to.eql('<div style="background: url(\'##javascript:alert(1)\')"></div>');
+    });
+
 
     it('chained filter - yubl yavd yufull test', function() {
     	var html = '<a href="{{{yubl (yavd (yufull url))}}}">link</a>';

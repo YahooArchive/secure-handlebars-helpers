@@ -18,4 +18,4 @@ Authors: Nera Liu <neraliu@yahoo-inc.com>
     for (; (name = filterNames[i]); i++) {
     	Handlebars.registerHelper(name, privFilters[name]);
     }
-})(Handlebars, ['y','yd','yc','yavd','yavs','yavu','yu','yuc','yubl','yufull'], 0);
+})(Handlebars, ['y', 'yd', 'yc', 'yavd', 'yavs', 'yavu', 'yu', 'yuc', 'yubl', 'yufull', 'yceu', 'yced', 'yces', 'yceuu', 'yceud', 'yceus'], 0);
