@@ -63,11 +63,35 @@ describe("secure handlebars helpers: error tests", function() {
         expect(filter.yceud()).to.eql('undefined');
         expect(filter.yceus()).to.eql('undefined');
 
-    	expect(filter.y()).to.eql('undefined');
+    	expect(filter.y()).to.eql('');
+    });
+
+    it('filters handling of null input', function() {
+        
+        expect(filter.yd(null)).to.eql('null');
+        expect(filter.yc(null)).to.eql('null');
+        
+        expect(filter.yavd(null)).to.eql('null');
+        expect(filter.yavs(null)).to.eql('null');
+        expect(filter.yavu(null)).to.eql('null');
+        
+        expect(filter.yu(null)).to.eql('null');
+        expect(filter.yuc(null)).to.eql('null');
+        expect(filter.yufull(null)).to.eql('null');
+        // yubl will not be independently used
+        // expect(filter.yubl()).to.eql('null');
+
+        expect(filter.yceu(null)).to.eql('null');
+        expect(filter.yced(null)).to.eql('null');
+        expect(filter.yces(null)).to.eql('null');
+        expect(filter.yceuu(null)).to.eql('null');
+        expect(filter.yceud(null)).to.eql('null');
+        expect(filter.yceus(null)).to.eql('null');
+
+        expect(filter.y(null)).to.eql('');
     });
 
 });
-
 
 /* the functional test is tested against in the contextparse-filters */
 describe("secure handlebars helpers: compilation tests", function() {
@@ -224,7 +248,7 @@ describe("secure handlebars helpers: compilation tests", function() {
         var html = '<script>{{{y script}}}</script>';
         var json = {script: "&<>'\"&<>'\""};
         var output = compilation_test(html, json);
-        expect(output).to.eql('<script>&amp;&lt;&gt;&#39;&quot;&amp;&lt;&gt;&#39;&quot;</script>');
+        expect(output).to.eql('<script>&amp;&lt;&gt;&#x27;&quot;&amp;&lt;&gt;&#x27;&quot;</script>');
     });
 
 
