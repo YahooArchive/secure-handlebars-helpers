@@ -1,7 +1,7 @@
 {
   "name": "secure-handlebars-helpers",
   "description": "Client-side XSS filters for templates processed by context-parser-handlebars",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "licenses": [
     {
       "type": "BSD",
@@ -42,7 +42,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "xss-filters": "^1.0.6"
+    "xss-filters": "^1.2.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
