@@ -17,7 +17,7 @@ deploy:
   provider: npm
   email: neraliu@yahoo-inc.com
   api_key:
-    secure: LlhF8dO3Plt023CjeQRumw9ZgBNsE2KWanHrRY/SnMoFxWgcVYEbzX3Ze5CtoRvtm8CH+3z71L11BaL52GN0qm+0zX93h4JXTYETloEzX2pdJpiBXATzEKcscLC5bfsarh2I/UlkSPQP2b+mkAi3RJu/rjF4CBjbpwka90aF1k0=
+    secure: IAl277fa7yO+lDlPveRw2gDikCnwtiLvZsGDEtXzmhaPmHT98zrtUqd8dy+9CmQi9GaGz5o+1kE5DuhSQKi6XT2W2g5WgEEy++vlcg01X8+bH5zNfpyGmvbTtZj2JYX4GJExAuY02APuKEAAfc9S+S5QITWpqOW7IcjkDYhzkMI=
   on:
     condition: $VALID_VERSION = true
     tags: true
