@@ -18,6 +18,11 @@ Authors: Nera Liu <neraliu@yahoo-inc.com>
 
     Handlebars.registerHelper('y', Handlebars.Utils.escapeExpression);
 
+    // the following is used for data pre-escaping
+    Handlebars.registerHelper('ya', privFilters.ya);
+    Handlebars.registerHelper('uriComponentData', privFilters.yuc);
+    Handlebars.registerHelper('uriData', privFilters.yublf);
+
     // don't escape SafeStrings, since they're already safe according to Handlebars
     // Reference: https://github.com/wycats/handlebars.js/blob/master/lib/handlebars/utils.js#L63-L82
     function safeStringCompatibleFilter (filterName) {
