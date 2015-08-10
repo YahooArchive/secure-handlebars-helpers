@@ -44,7 +44,7 @@ module.exports = function(config) {
       'karma-phantomjs-launcher',
       'karma-mocha',
       'karma-coverage',
-      'karma-junit-reporter'
+      // 'karma-junit-reporter'
     ],
 
     // Continuous Integration mode
@@ -57,7 +57,7 @@ module.exports = function(config) {
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
     logLevel: config.LOG_INFO,
 
-    reporters: ['junit', 'progress'],
+    reporters: ['progress'],
 
     client: {
       mocha: {
