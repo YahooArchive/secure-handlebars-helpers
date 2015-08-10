@@ -1,13 +1,8 @@
 {
   "name": "secure-handlebars-helpers",
-  "description": "Client-side XSS filters for templates processed by context-parser-handlebars",
-  "version": "1.0.7",
-  "licenses": [
-    {
-      "type": "BSD",
-      "url": "https://github.com/yahoo/secure-handlebars-helpers/blob/master/LICENSE"
-    }
-  ],
+  "description": "Client-side XSS filters for templates processed by secure-handlebars",
+  "version": "1.0.8",
+  "license": "SEE LICENSE IN LICENSE",
   "author": "Nera Liu <neraliu@yahoo-inc.com>, Adonis Fung <adon@yahoo-inc.com> and Albert Yu <albertyu@yahoo-inc.com>",
   "contributors": [
     {
@@ -42,7 +37,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "xss-filters": "^1.2.0"
+    "xss-filters": "^1.2.6"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
