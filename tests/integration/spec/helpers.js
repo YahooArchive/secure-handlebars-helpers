@@ -165,7 +165,7 @@ describe("secure handlebars helpers: compilation tests", function() {
         var html = '<div style="background: url({{{yceuu value}}})"></div>';
         var json = {value: "javascript:alert(1)"};
         var output = compilation_test(html, json);
-        expect(output).to.eql('<div style="background: url(##javascript:alert\\28 1\\29 )"></div>');
+        expect(output).to.eql('<div style="background: url(##javascript:alert%281%29)"></div>');
     });
     it('filter yceud test', function() {
         var html = '<div style="background: url(&quot;{{{yceud value}}}&quot;)"></div>';
