@@ -29,6 +29,7 @@
     "handlebars",
     "helpers"
   ],
+  "main": "dist/secure-handlebars-helpers.min.js",
   "scripts": {
     "hint": "grunt jshint",
     "build": "npm install; grunt build",
